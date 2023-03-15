@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stack Viewer</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="lib/demoStyle/demo.css" type="text/css">
+    <link rel="stylesheet" href="lib/metroStyle/metroStyle.css" type="text/css">
+    <style>
+        .method {
+            padding: 12px;
+            background: #2F6F44;
+            color: white;
+            border-radius: 10px;
+            margin: 3px;
+        }
+
+        .methodTd {
+            vertical-align: top;
+        }
+
+        .formatted {
+            white-space: pre-wrap;
+        }
+
+        ul.ztree {
+            width: 400px;
+            height: 800px;
+        }
+
+        .tippy-box {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <div class="col-8">
+            <table id="methodExecution">
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<script type="text/javascript" src="lib/jquery.ztree.core.js"></script>
+
+<script src="stack-report.js"></script>
+<script src="src/functions.js"></script>
+<script id="inputOutputToolTip" type="text/x-handlebars-template">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                Input:
+            </div>
+            <div class="col-6">
+                Output:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6  formatted">
+{{input}}
+            </div>
+            <div class="col-6  formatted">
+{{output}}
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    function getIndex(path) {
+        let index = 0
+        if (!isNaN(path[path.length - 1].name)) {
+            index = path.pop().name;
+        }
+        return index;
+    }
+
+    $(document).ready(function () {
+        var methodExecutions = getKeysByPattern(window, new RegExp('methodExecution*'));
+
+        var zTreeObj;
+        var setting = {
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            if (!treeNode.isParent) {
+                let $methodExecution = $('#methodExecution');
+                $methodExecution.empty();
+                let path = treeNode.getPath();
+                let index = getIndex(path);
+                let foundMethodExecutions = getMethodExecutions(path, methodExecutions);
+
+                appendTo($methodExecution, foundMethodExecutions[index]);
+            }
+        }
+
+        let zNodes = getZNodes(methodExecutions);
+
+
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+</script>
+</body>
+</html>
