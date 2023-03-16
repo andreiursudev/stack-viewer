@@ -320,12 +320,12 @@ describe('getZNodes', function() {
         let result = getZNodes(methodExecutions);
 
         expect(result).toEqual([
-            {name:"your", open:true, children:[
-                    {name:"package", open:true, children:[
-                            {name:"name", open:true, children:[
-                                    {name:"logic", open:true, children:[
-                                            {name:"logic1", open:true, children:[
-                                                    {name:"Object1Test", open:true, children:[
+            {name:"your", children:[
+                    {name:"package", children:[
+                            {name:"name", children:[
+                                    {name:"logic", children:[
+                                            {name:"logic1", children:[
+                                                    {name:"Object1Test", children:[
                                                             {name:"callMethod1"}]}]}]}]}]}]}]);
     });
 
@@ -350,12 +350,12 @@ describe('getZNodes', function() {
         let result = getZNodes(methodExecutions);
 
         expect(result).toEqual([
-            {name:"your", open:true, children:[
-                    {name:"package", open:true, children:[
-                            {name:"name", open:true, children:[
-                                    {name:"logic", open:true, children:[
-                                            {name:"logic1", open:true, children:[
-                                                    {name:"Object1Test", open:true, children:[
+            {name:"your", children:[
+                    {name:"package", children:[
+                            {name:"name", children:[
+                                    {name:"logic", children:[
+                                            {name:"logic1", children:[
+                                                    {name:"Object1Test", children:[
                                                             {name:"callMethod1"}, {name:"callMethod2"}]}]}]}]}]}]}]);
     });
 
@@ -379,15 +379,15 @@ describe('getZNodes', function() {
         let result = getZNodes(methodExecutions);
 
         expect(result).toEqual([
-            {name:"your", open:true, children:[
-                    {name:"package", open:true, children:[
-                            {name:"name", open:true, children:[
-                                    {name:"logic", open:true, children:[
-                                            {name:"logic1", open:true, children:[
-                                                    {name:"Object1Test", open:true, children:[
+            {name:"your", children:[
+                    {name:"package", children:[
+                            {name:"name", children:[
+                                    {name:"logic", children:[
+                                            {name:"logic1", children:[
+                                                    {name:"Object1Test", children:[
                                                             {name:"callMethod1"}]}]},
-                                            {name:"logic2", open:true, children:[
-                                                    {name:"Object2Test", open:true, children:[
+                                            {name:"logic2", children:[
+                                                    {name:"Object2Test", children:[
                                                             {name:"callMethod2"}]}]}]}]}]}]}]);
     });
 
@@ -411,13 +411,13 @@ describe('getZNodes', function() {
         let result = getZNodes(methodExecutions);
 
         expect(result).toEqual([
-            {name:"your", open:true, children:[
-                    {name:"package", open:true, children:[
-                            {name:"name", open:true, children:[
-                                    {name:"logic", open:true, children:[
-                                            {name:"logic1", open:true, children:[
-                                                    {name:"Object1Test", open:true, children:[
-                                                            {name:"callMethod1",open:true, children:[{name:0}, {name:1}]}]}]}]}]}]}]}]);
+            {name:"your", children:[
+                    {name:"package", children:[
+                            {name:"name", children:[
+                                    {name:"logic", children:[
+                                            {name:"logic1", children:[
+                                                    {name:"Object1Test", children:[
+                                                            {name:"callMethod1", children:[{name:0}, {name:1}]}]}]}]}]}]}]}]);
     });
 
     it('three methodExecutions with one same the package name', function() {
@@ -445,13 +445,13 @@ describe('getZNodes', function() {
         let result = getZNodes(methodExecutions);
 
         expect(result).toEqual([
-            {name:"your", open:true, children:[
-                    {name:"package", open:true, children:[
-                            {name:"name", open:true, children:[
-                                    {name:"logic", open:true, children:[
-                                            {name:"logic1", open:true, children:[
-                                                    {name:"Object1Test", open:true, children:[
-                                                            {name:"callMethod1",open:true, children:[{name:0}, {name:1}, {name:2}]}]}]}]}]}]}]}]);
+            {name:"your", children:[
+                    {name:"package", children:[
+                            {name:"name", children:[
+                                    {name:"logic", children:[
+                                            {name:"logic1", children:[
+                                                    {name:"Object1Test", children:[
+                                                            {name:"callMethod1", children:[{name:0}, {name:1}, {name:2}]}]}]}]}]}]}]}]);
     });
 })
 

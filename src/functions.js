@@ -120,7 +120,6 @@ function getZNode(directories, index, lastChild, zNodes, zNode) {
         } else {
             let zNode = {
                 name: directory,
-                open: true,
                 children: []
             };
             zNodes.push(zNode)
@@ -131,7 +130,6 @@ function getZNode(directories, index, lastChild, zNodes, zNode) {
             zNode.children.push(lastChild);
         } else {
             let existingZNode = zNode.children.find(n => n["name"] === lastChild.name);
-            existingZNode.open = true;
             if(existingZNode.children == null){
                 existingZNode.children = [];
                 existingZNode.children.push({name: 0});
